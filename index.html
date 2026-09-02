@@ -128,7 +128,15 @@
         function calculate() {
             try {
                 if (display.value === '') return;
-                display.value = eval(display.value);
+                const result = eval(display.value);
+                if (result === Infinity) {
+                    display.value = 'Infinity';
+                } else if (isNaN(result)) {
+                    display.value = 'Error';
+                    setTimeout(clearDisplay, 1500);
+                } else {
+                    display.value = result;
+                }
             } catch (error) {
                 display.value = 'Error';
                 setTimeout(clearDisplay, 1500);
